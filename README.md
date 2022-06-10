@@ -16,3 +16,15 @@ Build and run this project using `mvn clean package && java -jar target/demo-0.0
 * Downgrading to Spring 2.6.8
 * Building the jar with spring-boot-maven-plugin without shading
 * Running the project directly in IntelliJ
+
+
+## Final solution
+See https://github.com/spring-projects/spring-boot/issues/31316, credits to @philwebb
+```
+<transformer implementation="org.apache.maven.plugins.shade.resource.AppendingTransformer">
+  <resource>META-INF/spring.handlers</resource>
+  <resource>META-INF/spring.schemas</resource>
+  <resource>META-INF/spring/org.springframework.boot.actuate.autoconfigure.web.ManagementContextConfiguration.imports</resource>
+  <resource>META-INF/spring/org.springframework.boot.autoconfigure.AutoConfiguration.imports</resource>
+</transformer>
+```
